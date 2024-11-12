@@ -16,17 +16,22 @@ Route::middleware('auth')->prefix('admin')->group(function(){
     Route::controller(DashboardController::class)->group(function(){
         Route::get('home','index')->name('dashboard');
     });
-    Route::controller(UserController::class)->group(function(){
-        Route::get('users','index')->name('users.index');
-        Route::post('users/create','store')->name('users.store');
-        Route::post('users/edit','edit')->name('users.edit');
-        Route::post('users/update','update')->name('users.update');
-        Route::post('users/status','status_toogle')->name('users.status.toogle');
-        Route::post('users/delete','destroy')->name('users.destroy');
-        Route::post('users/details','details')->name('users.details');
+    Route::controller(UserController::class)->prefix('users')->group(function(){
+        Route::get('/','index')->name('users.index');
+        Route::post('create','store')->name('users.store');
+        Route::post('edit','edit')->name('users.edit');
+        Route::post('update','update')->name('users.update');
+        Route::post('status','status_toogle')->name('users.status.toogle');
+        Route::post('delete','destroy')->name('users.destroy');
+        Route::post('details','details')->name('users.details');
     });
-    Route::controller(CategoryController::class)->group(function(){
-        Route::get('categories','index')->name('categories.index');
+    Route::controller(CategoryController::class)->prefix( 'categories')->group(function(){
+        Route::get('/','index')->name('categories.index');
+        Route::post('create','store')->name('categories.store');
+        Route::post('edit','edit')->name('categories.edit');
+        Route::post('update','update')->name('categories.update');
+        Route::post('delete','destroy')->name('categories.destroy');
+        Route::post('status','status_toogle')->name('categories.status.toogle');
     });
 });
 

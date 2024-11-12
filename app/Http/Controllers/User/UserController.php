@@ -64,7 +64,7 @@ class UserController extends Controller
             'title' => 'Success',
             'body' => 'User created successfully!'
         ]);
-        return redirect()->back()->with('formType','create');
+        return redirect()->back()->with('formType','creat');
     }
     public function edit(Request $request){
         $user_details = $this->userRepo->user_details($request);
@@ -103,7 +103,7 @@ class UserController extends Controller
             'title' => 'Success',
             'body' => 'User updated successfully!'
         ]);
-        return redirect()->back()->with('formType','edit');
+        return redirect()->back()->with('formType','update');
     }
     public function details(Request $request){
         $user_details = $this->userRepo->user_details($request);

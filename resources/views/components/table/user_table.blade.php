@@ -58,15 +58,15 @@
                         <td>{{ $user->total_reviews }}</td>
                         <td>
                             <div class="row-span-2">
-                                <button id="edit" data-url="{{route('users.edit')}}" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalEdit"
-                                    data-id="{{ $user->id }}" class="btn btn-primary"><i
-                                        class="fas fa-edit"></i></button>
+                                <button data-url="{{ route('users.edit') }}" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#userUpdate" data-id="{{ $user->id }}"
+                                    class="btn btn-primary"><i class="fas fa-edit"></i></button>
                                 <button type="button" data-id="{{ $user->id }}"
                                     data-url="{{ route('users.destroy') }}" class="delete btn btn-danger"><i
                                         class="fas fa-trash"></i></button>
                                 <button type="button" data-id="{{ $user->id }}"
                                     data-url="{{ route('users.details') }}" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal2" class="details btn btn-success"><i
+                                    data-bs-target="#userDetails" class="details btn btn-success"><i
                                         class="fas fa-list-alt"></i></button>
                                 @switch($user->status)
                                     @case(\App\Enums\Users\Status::banned)

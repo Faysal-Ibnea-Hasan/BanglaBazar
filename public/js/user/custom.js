@@ -15,10 +15,11 @@ $(function(){
             },
         });
     });
-    $(".details").on("click",function(){
-        var id = $(this).data("id");
+    $("#userDetails").on("show.bs.modal",function(e){
+        let button = $(e.relatedTarget);
+        var id = button.data("id");
         $.ajax({
-            url: $(this).data("url"),
+            url: button.data("url"),
             type: "POST",
             dataType: "JSON",
             data: {
@@ -27,15 +28,16 @@ $(function(){
             success: function (response) {
                 if(response.status){
                     // Insert the returned HTML into the results div
-                    $("#details").html(response.html);
+                    $("#userDetails .modal-body").html(response.html);
                 }
             },
         });
     });
-    $("#edit").on("click",function(){
-        var id = $(this).data("id");
+    $("#userUpdate").on("show.bs.modal",function(e){
+        let button = $(e.relatedTarget);
+        var id = button.data("id");
         $.ajax({
-            url: $(this).data("url"),
+            url: button.data("url"),
             type: "POST",
             dataType: "JSON",
             data: {
@@ -43,7 +45,7 @@ $(function(){
             },
             success: function (response) {
                 if (response.status) {
-                    $("#editModal").html(response.html)
+                    $("#userUpdate .modal-body").html(response.html)
                 }
             },
         });

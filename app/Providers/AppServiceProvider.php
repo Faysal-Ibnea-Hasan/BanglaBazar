@@ -14,6 +14,8 @@ use App\Repositories\User\UserRepository;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
+use App\View\Components\Modal;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -39,6 +41,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Blade::component('modal', Modal::class);
     }
 }

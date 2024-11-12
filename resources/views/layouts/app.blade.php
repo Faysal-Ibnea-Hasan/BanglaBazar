@@ -61,6 +61,7 @@
             });
         });
     </script>
+    
 @endpush
 
 {{-- Add common CSS customizations --}}

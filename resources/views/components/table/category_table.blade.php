@@ -9,7 +9,7 @@
                     <th>Slug</th>
                     <th>Status</th>
                     <th>Display Order</th>
-                    <th>Created At</th>
+                    <th>Created</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -24,13 +24,13 @@
                         <td>
                             @switch($data->is_active)
                                 @case(1)
-                                    <button data-id="{{ $data->id }}" data-url="{{ route('users.status.toogle') }}"
-                                        data-type="status" class='status-toggle btn btn-success btn-sm'>Active</button>
+                                    <button data-id="{{ $data->id }}" value="0" data-url="{{ route('categories.status.toogle') }}"
+                                        class='status-toggle btn btn-success btn-sm'>Active</button>
                                 @break
 
                                 @case(0)
-                                    <button data-id="{{ $data->id }}" data-url="{{ route('users.status.toogle') }}"
-                                        data-type="status" class ='status-toggle btn btn-dark btn-sm'>In-active</button>
+                                    <button data-id="{{ $data->id }}" value="1" data-url="{{ route('categories.status.toogle') }}"
+                                        class ='status-toggle btn btn-dark btn-sm'>In-active</button>
                                 @break
 
                                 @default
@@ -38,15 +38,15 @@
                             @endswitch
                         </td>
                         <td>{{ $data->display_order }}</td>
-                        <td>{{ $data->created_at }}</td>
+                        <td>{{ date_time_format($data->created_at,'diffForHumans')}}</td>
                         <td>
                             <div class="row-span-2">
-                                <button id="edit" data-url="{{ route('users.edit') }}" type="button"
-                                    data-bs-toggle="modal" data-bs-target="#exampleModalEdit"
-                                    data-id="{{ $data->id }}" class="btn btn-primary"><i
-                                        class="fas fa-edit"></i></button>
+                                <button data-url="{{ route('categories.edit') }}" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#editCategory" data-id="{{ $data->id }}"
+                                    class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                                    @include('backend.admin.category.edit')
                                 <button type="button" data-id="{{ $data->id }}"
-                                    data-url="{{ route('users.destroy') }}" class="delete btn btn-danger"><i
+                                    data-url="{{ route('categories.destroy') }}" class="delete btn btn-danger"><i
                                         class="fas fa-trash"></i></button>
                             </div>
                         </td>
