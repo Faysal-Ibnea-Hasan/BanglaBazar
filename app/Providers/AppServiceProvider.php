@@ -10,6 +10,8 @@ use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Dashboard\DashboardRepository;
 use App\Repositories\Dashboard\DashboardRepositoryInterface;
+use App\Repositories\SubCategory\SubCategoryRepository;
+use App\Repositories\SubCategory\SubCategoryRepositoryInterface;
 use App\Repositories\User\UserRepository;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Support\Facades\Request;
@@ -28,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(DashboardRepositoryInterface::class, DashboardRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
+        $this->app->bind(SubCategoryRepositoryInterface::class, SubCategoryRepository::class);
         $this->app->bind(UserFilter::class, function ($app) {
             return new UserFilter($app->make(Request::class));
         });

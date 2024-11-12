@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Category;
 
+use App\Enums\Users\Status;
 use App\Models\Category;
 
 class CategoryRepository implements CategoryRepositoryInterface
@@ -49,5 +50,14 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         Category::findOrFail($request->id)->delete();
         return true;
+    }
+    public function status()
+    {
+        $status = [];
+        $status = [
+            Status::active => 'Active',
+            Status::in_active => 'Inactive',
+        ];
+        return $status;
     }
 }

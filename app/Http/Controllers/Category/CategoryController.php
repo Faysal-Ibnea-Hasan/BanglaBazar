@@ -20,7 +20,14 @@ class CategoryController extends Controller
     {
         $filters = new CategoryFilter($request);
         $all_data = $this->categoryRepo->all_category($filters);
-        return view('backend.admin.category.index', compact('all_data'));
+        $status = $this->categoryRepo->status();
+        if ($request->ajax()) {
+            // Return a partial view that contains only the posts list
+            return response()->json([
+                'html' => view('components.table.category_table',compact('all_data'))->render(),
+            ]);
+        }
+        return view('backend.admin.category.index', compact('all_data', 'status'));
     }
     public function store(CategoryRequest $request)
     {

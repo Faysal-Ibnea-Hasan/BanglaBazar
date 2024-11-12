@@ -1,6 +1,6 @@
 <?php
 namespace App\Filters;
-class CategoryFilter extends QueryFilter
+class SubCategoryFilter extends QueryFilter
 {
     public function search($keyword)
     {
@@ -12,6 +12,12 @@ class CategoryFilter extends QueryFilter
     {
         return $this->builder
         ->where('is_active', $status);
+
+    }
+    public function category($category_id)
+    {
+        return $this->builder
+        ->where('category_id', $category_id);
 
     }
 

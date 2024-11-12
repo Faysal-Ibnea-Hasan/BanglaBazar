@@ -90,8 +90,8 @@ $sub_menu_icon = 'fab fa-ethereum'
                     </ul>
                 </li>
                 {{-- Category and Sub Category Management --}}
-                <li class="nav-item menu-{{ request()->is('admin/categories*') ? 'open' :'close' }}">
-                    <a href="#" class="nav-link {{ request()->is('admin/categories*') ? 'active' :'' }}">
+                <li class="nav-item menu-{{ request()->is('admin/categories*') || request()->is('admin/sub_categories*') ? 'open' :'close' }}">
+                    <a href="#" class="nav-link {{ request()->is('admin/categories*') || request()->is('admin/sub_categories*') ? 'active' :'' }}">
                         <i class="fas fa-tags"></i>
                         <p>
                             Category & Sub-Category
@@ -106,7 +106,7 @@ $sub_menu_icon = 'fab fa-ethereum'
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('sub_categories.index')}}" class="nav-link">
                                 <i class="{{$sub_menu_icon}}"></i>
                                 <p>Sub Categories</p>
                             </a>

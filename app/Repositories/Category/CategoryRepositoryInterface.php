@@ -8,6 +8,6 @@ interface CategoryRepositoryInterface{
     public function delete_category($request);
     public function status_toogle($request);
     public function category_details($request);
-
+    public function status();
 
 }

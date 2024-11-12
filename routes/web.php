@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\SubCategory\SubCategoryController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,16 @@ Route::middleware('auth')->prefix('admin')->group(function(){
         Route::post('update','update')->name('categories.update');
         Route::post('delete','destroy')->name('categories.destroy');
         Route::post('status','status_toogle')->name('categories.status.toogle');
+    });
+    Route::controller(SubCategoryController::class)->prefix( 'sub_categories')->group(function(){
+        Route::get('/','index')->name('sub_categories.index');
+        Route::post('create','store')->name('sub_categories.store');
+        Route::post('edit','edit')->name('sub_categories.edit');
+        Route::post('update','update')->name('sub_categories.update');
+        Route::post('delete','destroy')->name('sub_categories.destroy');
+        Route::post('status','status_toogle')->name('sub_categories.status.toogle');
+        Route::get('search-dropdown','searchDropdown')->name('search.dropdown');
+
     });
 });
 
