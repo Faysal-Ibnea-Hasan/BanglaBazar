@@ -49,10 +49,23 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function scopeFilter($query, QueryFilter $filters){
+    public function scopeFilter($query, QueryFilter $filters)
+    {
         return $filters->apply($query);
     }
-    public function user_addresses(){
-        return $this->hasOne(UserAddress::class,'user_id');
+    public function user_addresses()
+    {
+        return $this->hasOne(UserAddress::class, 'user_id');
+    }
+    // Users that this user is following
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'following_id');
+    }
+
+    // Users that follow this user
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'following_id', 'follower_id');
     }
 }

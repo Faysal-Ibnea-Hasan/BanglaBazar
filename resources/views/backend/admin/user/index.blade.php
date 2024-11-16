@@ -29,3 +29,33 @@
     <script src="{{ asset('js/user/custom.js') }}"></script>
     <script src="{{ asset('js/user/search.js') }}"></script>
 @endpush
+@push('css')
+    <style type="text/css">
+        .file-upload {
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .file-upload label {
+            background-color: #007bff;
+            /* Button color */
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .file-upload label i {
+            font-size: 20px;
+        }
+
+        /* Hide the actual file input */
+        .file-upload input[type="file"] {
+            display: none;
+        }
+    </style>
+@endpush

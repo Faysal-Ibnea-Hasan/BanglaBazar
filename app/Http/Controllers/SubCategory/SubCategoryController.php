@@ -44,14 +44,53 @@ class SubCategoryController extends Controller
         ]);
         return redirect()->back()->with('formType', 'create');
     }
-    public function edit(){
-
+    public function edit(Request $request){
+        $sub_category_details = $this->subCategoryRepo->sub_category_details($request);
+        if ($request->ajax()) {
+            // Return a partial view that contains only the posts list
+            return response()->json([
+                'status' => true,
+                'html' => view('components.modal.body.subCategory.edit', compact('sub_category_details'))->render(),
+            ],200);
+        }
     }
     public function update(SubCategoryRequest $request){
+        switch ($request->is_active) {
+            case 'on':
+                $request['is_active'] = 1;
+                break;
 
+            default:
+                $request['is_active'] = 0;
+                break;
+        }
+        $this->subCategoryRepo->update_sub_category($request);
+        Session::flash('toast-success', [
+            'title' => 'Success',
+            'body' => 'Sub-Category updated successfully!'
+        ]);
+        return redirect()->back()->with('formType', 'update');
+    }
+    public function status_toogle(Request $request)
+    {
+        // dd($request->all());
+        $this->subCategoryRepo->status_toogle($request);
+        Session::flash('toast-success', [
+            'title' => 'Success',
+            'body' => 'Status was changed successfully!'
+        ]);
+        return response()->json([
+            'status' => true,
+        ], 200);
     }
     public function destroy(Request $request){
-
+        $this->subCategoryRepo->delete_sub_category($request);
+        Session::flash('toast-success',[
+            'title' => 'Success',
+            'body' => 'Category deleted successfully!'
+        ]);
+        return response()->json([
+            'status' => true
+        ],200);
     }
-
 }

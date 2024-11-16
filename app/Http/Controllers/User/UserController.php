@@ -5,21 +5,25 @@ namespace App\Http\Controllers\User;
 use App\Filters\UserFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserRequest;
+use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Services\FileUploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
-    private $userRepo;
+    protected $userRepo;
+    protected $fileUploadService;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(UserRepositoryInterface $userRepo)
+    public function __construct(UserRepositoryInterface $userRepo, FileUploadService $fileUploadService)
     {
         $this->userRepo = $userRepo;
+        $this->fileUploadService = $fileUploadService;
         $this->middleware('auth');
     }
     public function index(Request $request)
@@ -34,7 +38,7 @@ class UserController extends Controller
                 'html' => view('components.table.user_table', compact('all_users'))->render(),
             ]);
         }
-        return view('backend.admin.user.index', compact('all_users','user_status','user_verification_status'));
+        return view('backend.admin.user.index', compact('all_users', 'user_status', 'user_verification_status'));
     }
     public function store(UserRequest $request)
     {
@@ -64,19 +68,21 @@ class UserController extends Controller
             'title' => 'Success',
             'body' => 'User created successfully!'
         ]);
-        return redirect()->back()->with('formType','creat');
+        return redirect()->back()->with('formType', 'creat');
     }
-    public function edit(Request $request){
+    public function edit(Request $request)
+    {
         $user_details = $this->userRepo->user_details($request);
         if ($request->ajax()) {
             // Return a partial view that contains only the posts list
             return response()->json([
                 'status' => true,
                 'html' => view('components.modal.body.user.edit', compact('user_details'))->render(),
-            ],200);
+            ], 200);
         }
     }
-    public function update(UserRequest $request){
+    public function update(UserRequest $request)
+    {
         switch ($request->status) {
             case 'on':
                 $request['status'] = 1;
@@ -103,9 +109,10 @@ class UserController extends Controller
             'title' => 'Success',
             'body' => 'User updated successfully!'
         ]);
-        return redirect()->back()->with('formType','update');
+        return redirect()->back()->with('formType', 'update');
     }
-    public function details(Request $request){
+    public function details(Request $request)
+    {
         $user_details = $this->userRepo->user_details($request);
         if ($request->ajax()) {
             // Return a partial view that contains only the posts list
@@ -127,15 +134,36 @@ class UserController extends Controller
             'status' => true,
         ], 200);
     }
-    public function destroy(Request $request){
+    public function destroy(Request $request)
+    {
         $this->userRepo->delete_user($request);
-        Session::flash('toast-success',[
+        Session::flash('toast-success', [
             'title' => 'Success',
             'body' => 'User deleted successfully!'
         ]);
         return response()->json([
             'status' => true
-        ],200);
+        ], 200);
+    }
+    public function imageUpload(Request $request)
+    {
+        // Upload and process an image
+        if ($request->hasFile('image')) {
+            $imagePath = $this->fileUploadService->upload(
+                $request->file('image'),
+                'public',
+                'users'
+            );
+            // Get public URL of the uploaded image
+            //$imageUrl = $this->fileUploadService->url($imagePath);
+            $user = User::where('id', $request->id)->first();
+            $user->profile_picture = $imagePath;
+            $user->save();
+        }
+        return response()->json([
+            'status' => true,
+            'image_url' => $imageUrl ?? null
+        ]);
     }
 
 }

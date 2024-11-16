@@ -13,6 +13,7 @@ class UserRepository implements UserRepositoryInterface
     public function all_users($filters)
     {
         return User::orderBy('created_at', 'DESC')
+            ->with('followers', 'following')
             ->filter($filters)
             ->paginate('10')
             ->appends(request()->query()); // For not refreshing whole result in pagination

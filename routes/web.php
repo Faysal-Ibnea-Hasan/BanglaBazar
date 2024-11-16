@@ -25,6 +25,7 @@ Route::middleware('auth')->prefix('admin')->group(function(){
         Route::post('status','status_toogle')->name('users.status.toogle');
         Route::post('delete','destroy')->name('users.destroy');
         Route::post('details','details')->name('users.details');
+        Route::post('image-upload','imageUpload')->name('users.imageUpload');
     });
     Route::controller(CategoryController::class)->prefix( 'categories')->group(function(){
         Route::get('/','index')->name('categories.index');
@@ -41,8 +42,6 @@ Route::middleware('auth')->prefix('admin')->group(function(){
         Route::post('update','update')->name('sub_categories.update');
         Route::post('delete','destroy')->name('sub_categories.destroy');
         Route::post('status','status_toogle')->name('sub_categories.status.toogle');
-        Route::get('search-dropdown','searchDropdown')->name('search.dropdown');
-
     });
 });
 

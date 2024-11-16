@@ -10,6 +10,7 @@
                     <th>Status</th>
                     <th>Rating</th>
                     <th>Total Reviews</th>
+                    <th>Total Followers</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -56,6 +57,7 @@
                         </td>
                         <td>{{ $user->rating }}</td>
                         <td>{{ $user->total_reviews }}</td>
+                        <td>{{ $user->followers->count() }}</td>
                         <td>
                             <div class="row-span-2">
                                 <button data-url="{{ route('users.edit') }}" type="button" data-bs-toggle="modal"

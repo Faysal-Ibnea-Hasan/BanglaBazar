@@ -43,12 +43,12 @@
                         <td>{{ date_time_format($data->created_at,'diffForHumans')}}</td>
                         <td>
                             <div class="row-span-2">
-                                <button data-url="{{ route('categories.edit') }}" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#editCategory" data-id="{{ $data->id }}"
+                                <button data-url="{{ route('sub_categories.edit') }}" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#editSubCategory" data-id="{{ $data->id }}"
                                     class="btn btn-primary"><i class="fas fa-edit"></i></button>
-                                    @include('backend.admin.category.edit')
+                                    @include('backend.admin.subCategory.edit')
                                 <button type="button" data-id="{{ $data->id }}"
-                                    data-url="{{ route('categories.destroy') }}" class="delete btn btn-danger"><i
+                                    data-url="{{ route('sub_categories.destroy') }}" class="delete btn btn-danger"><i
                                         class="fas fa-trash"></i></button>
                             </div>
                         </td>

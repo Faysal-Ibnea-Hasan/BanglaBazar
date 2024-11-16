@@ -14,7 +14,8 @@ class SubCategoryRepository implements SubCategoryRepositoryInterface
             ->paginate('10')
             ->appends(request()->query()); // For not refreshing whole result in pagination
     }
-    public function store_sub_category($request){
+    public function store_sub_category($request)
+    {
         SubCategory::create($request->all());
         return true;
     }
@@ -26,5 +27,44 @@ class SubCategoryRepository implements SubCategoryRepositoryInterface
             Status::in_active => 'Inactive',
         ];
         return $status;
+    }
+    public function sub_category_details($request)
+    {
+        return SubCategory::where('id', $request->id)->first();
+    }
+    public function update_sub_category($request)
+    {
+        try {
+            SubCategory::where('id', $request->id)->update(
+                $request->only([
+                    'name',
+                    'category_id',
+                    'description',
+                    'display_order',
+                    'is_active',
+                ])
+            );
+            return true;
+        } catch (\Exception $e) {
+            // Handle or log error
+            return false;
+        }
+
+    }
+    public function status_toogle($request)
+    {
+        try {
+            $sub_category = SubCategory::findOrFail($request->id);
+            $sub_category->is_active = $request->status;
+            $sub_category->save();
+            return true;
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+    public function delete_sub_category($request)
+    {
+        SubCategory::findOrFail($request->id)->delete();
+        return true;
     }
 }

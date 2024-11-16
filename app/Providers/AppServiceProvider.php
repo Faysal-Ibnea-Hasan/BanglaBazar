@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Filters\CategoryFilter;
+use App\Filters\SubCategoryFilter;
 use App\Filters\UserFilter;
 use App\Repositories\Auth\AuthRepository;
 use App\Repositories\Auth\AuthRepositoryInterface;
@@ -14,6 +15,7 @@ use App\Repositories\SubCategory\SubCategoryRepository;
 use App\Repositories\SubCategory\SubCategoryRepositoryInterface;
 use App\Repositories\User\UserRepository;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Services\FileUploadService;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
@@ -36,6 +38,12 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind(CategoryFilter::class, function ($app) {
             return new CategoryFilter($app->make(Request::class));
+        });
+        $this->app->bind(SubCategoryFilter::class, function ($app) {
+            return new SubCategoryFilter($app->make(Request::class));
+        });
+        $this->app->singleton(FileUploadService::class, function () {
+            return new FileUploadService();
         });
     }
 
