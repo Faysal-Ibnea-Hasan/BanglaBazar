@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Repositories\Auth\AuthRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,9 @@ class AuthController extends Controller
     {
         //return $request;
         $cred = $request->validated();
-        $this->authRepository->authenticate($cred);
+        $user = $this->authRepository->authenticate($cred);
+        $user->last_login = Carbon::now();
+        $user->save();
         return redirect()->route('dashboard');
     }
     public function logout(Request $request)

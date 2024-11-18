@@ -14,7 +14,7 @@ class AuthRepository implements AuthRepositoryInterface
         // Attempt to log the user in
         if (Auth::attempt($cred)) {
              Admin::findOrFail(Auth::user()->id);
-             return true;
+             return Auth::user();
         } else{
             return false;
         }

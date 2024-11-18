@@ -1,6 +1,6 @@
 <div id="results" class="d-flex justify-content-start">
     <div class="col-12">
-        <table id="example" class="table table-striped table-bordered">
+        <table id="example" class="table table-sm table-bordered">
             <thead>
                 <tr>
                     <th>SN</th>
@@ -11,6 +11,7 @@
                     <th>Rating</th>
                     <th>Total Reviews</th>
                     <th>Total Followers</th>
+                    <th>Last Login</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -58,6 +59,8 @@
                         <td>{{ $user->rating }}</td>
                         <td>{{ $user->total_reviews }}</td>
                         <td>{{ $user->followers->count() }}</td>
+                        <td>{{ $user->last_login ? date_time_format($user->last_login, 'diffForHumans') : 'Undefined' }}
+                        </td>
                         <td>
                             <div class="row-span-2">
                                 <button data-url="{{ route('users.edit') }}" type="button" data-bs-toggle="modal"
