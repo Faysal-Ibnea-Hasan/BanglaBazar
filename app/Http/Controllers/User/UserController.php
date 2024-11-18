@@ -126,10 +126,7 @@ class UserController extends Controller
     {
         // dd($request->all());
         $this->userRepo->status_toogle($request);
-        Session::flash('toast-success', [
-            'title' => 'Success',
-            'body' => 'Status was changed successfully!'
-        ]);
+        Session::flash('success', 'Status was changed successfully');
         return response()->json([
             'status' => true,
         ], 200);

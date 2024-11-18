@@ -1,4 +1,4 @@
-@if (session('toast-success'))
+{{-- @if (session('toast-success'))
     <script>
         $(document).ready(function() {
             $(document).Toasts('create', {
@@ -10,4 +10,21 @@
             });
         });
     </script>
-@endif
+@endif --}}
+<script type="text/javascript">
+    @session("success")
+        toastr.success("{{ $value }}");
+    @endsession
+
+    @session("info")
+        toastr.info("{{ $value }}");
+    @endsession
+
+    @session("warning")
+        toastr.warning("{{ $value }}");
+    @endsession
+
+    @session("error")
+        toastr.error("{{ $value }}");
+    @endsession
+</script>
