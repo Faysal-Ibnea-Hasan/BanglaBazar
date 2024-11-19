@@ -29,6 +29,6 @@
     </div>
     <div class="col-12 d-flex justify-content-between">
         <button type="submit" class="btn btn-primary">Update</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     </div>
 </form>

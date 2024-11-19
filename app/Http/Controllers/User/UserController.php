@@ -64,11 +64,8 @@ class UserController extends Controller
         $request['user_id'] = $user_id;
         $request['country'] = 'Bangladesh';
         $this->userRepo->store_user_address($request);
-        Session::flash('toast-success', [
-            'title' => 'Success',
-            'body' => 'User created successfully!'
-        ]);
-        return redirect()->back()->with('formType', 'creat');
+        Session::flash('success', 'User created successfully!');
+        return redirect()->back();
     }
     public function edit(Request $request)
     {
@@ -105,11 +102,8 @@ class UserController extends Controller
         $request['user_id'] = $request->id;
         $request['country'] = 'Bangladesh';
         $this->userRepo->update_user_address($request);
-        Session::flash('toast-success', [
-            'title' => 'Success',
-            'body' => 'User updated successfully!'
-        ]);
-        return redirect()->back()->with('formType', 'update');
+        Session::flash('success','User updated successfully!');
+        return redirect()->back();
     }
     public function details(Request $request)
     {
@@ -134,10 +128,7 @@ class UserController extends Controller
     public function destroy(Request $request)
     {
         $this->userRepo->delete_user($request);
-        Session::flash('toast-success', [
-            'title' => 'Success',
-            'body' => 'User deleted successfully!'
-        ]);
+        Session::flash('success', 'User deleted successfully!');
         return response()->json([
             'status' => true
         ], 200);

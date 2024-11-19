@@ -37,15 +37,15 @@
         </div>
         <div class="col-12 d-flex justify-content-between">
             <button type="submit" class="btn btn-primary">Create</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
     </form>
 </x-modal>
 
 <script>
-    @if ($errors->any() && session('formType') ==='create')
-        // Open the modal if there are validation errors
-        var exampleModal = new bootstrap.Modal(document.getElementById('userCreate'));
-        exampleModal.show();
-    @endif
+    $(function() {
+        @if ($errors->any() && url()->previous() === route('categories.index'))
+            $('#categoryCreate').modal('show');
+        @endif
+    });
 </script>

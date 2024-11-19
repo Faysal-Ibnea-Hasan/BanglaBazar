@@ -1,6 +1,6 @@
 <!-- Main Sidebar Container -->
 @php
-$sub_menu_icon = 'fab fa-ethereum'
+    $sub_menu_icon = 'fab fa-ethereum';
 @endphp
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -18,7 +18,7 @@ $sub_menu_icon = 'fab fa-ethereum'
                 <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div> --}}
             <div class="info">
-                <a href="#" class="d-block">Hi, {{Auth::user()->name}}</a>
+                <a href="#" class="d-block">Hi, {{ Auth::user()->name }}</a>
             </div>
         </div>
 
@@ -28,23 +28,25 @@ $sub_menu_icon = 'fab fa-ethereum'
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-               <li class="nav-item">
-                    <a href="{{route('dashboard')}}" class="nav-link {{ request()->is('admin/home') ? 'active' : '' }}">
+                <li class="nav-item">
+                    <a href="{{ route('dashboard') }}"
+                        class="nav-link {{ request()->is('admin/home') ? 'active' : '' }}">
                         <i class="far fa-chart-bar"></i>
                         <p>
                             Dashboard
                         </p>
                     </a>
                 </li>
-                <li class="nav-item menu-{{ request()->is('admin/users*') ? 'open' :'close' }}">
-                    <a href="#" class="nav-link {{ request()->is('admin/users*') ? 'active' :'' }}">
+                <li class="nav-item menu-{{ request()->is('admin/users*') ? 'open' : 'close' }}">
+                    <a href="{{ route('users.index') }}"
+                        class="nav-link {{ request()->is('admin/users*') ? 'active' : '' }}">
                         <i class="fas fa-address-card"></i>
                         <p>
                             User Management
-                            <i class="right fas fa-angle-left"></i>
+                            {{-- <i class="right fas fa-angle-left"></i> --}}
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
+                    {{-- <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{route('users.index')}}" class="nav-link">
                                 <i class="{{$sub_menu_icon}}"></i>
@@ -63,7 +65,7 @@ $sub_menu_icon = 'fab fa-ethereum'
                                 <p>Actions</p>
                             </a>
                         </li>
-                    </ul>
+                    </ul> --}}
                 </li>
                 {{-- Product Management --}}
                 <li class="nav-item menu-close">
@@ -77,21 +79,23 @@ $sub_menu_icon = 'fab fa-ethereum'
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="{{$sub_menu_icon}}"></i>
+                                <i class="{{ $sub_menu_icon }}"></i>
                                 <p>Products</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="{{$sub_menu_icon}}"></i>
+                                <i class="{{ $sub_menu_icon }}"></i>
                                 <p>Actions</p>
                             </a>
                         </li>
                     </ul>
                 </li>
                 {{-- Category and Sub Category Management --}}
-                <li class="nav-item menu-{{ request()->is('admin/categories*') || request()->is('admin/sub_categories*') ? 'open' :'close' }}">
-                    <a href="#" class="nav-link {{ request()->is('admin/categories*') || request()->is('admin/sub_categories*') ? 'active' :'' }}">
+                <li
+                    class="nav-item menu-{{ request()->is('admin/categories*') || request()->is('admin/sub_categories*') ? 'open' : 'close' }}">
+                    <a href="#"
+                        class="nav-link {{ request()->is('admin/categories*') || request()->is('admin/sub_categories*') ? 'active' : '' }}">
                         <i class="fas fa-tags"></i>
                         <p>
                             Category & Sub-Category
@@ -100,14 +104,14 @@ $sub_menu_icon = 'fab fa-ethereum'
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('categories.index')}}" class="nav-link">
-                                <i class="{{$sub_menu_icon}}"></i>
+                            <a href="{{ route('categories.index') }}" class="nav-link">
+                                <i class="{{ $sub_menu_icon }}"></i>
                                 <p>Categories</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('sub_categories.index')}}" class="nav-link">
-                                <i class="{{$sub_menu_icon}}"></i>
+                            <a href="{{ route('sub_categories.index') }}" class="nav-link">
+                                <i class="{{ $sub_menu_icon }}"></i>
                                 <p>Sub Categories</p>
                             </a>
                         </li>
@@ -125,13 +129,13 @@ $sub_menu_icon = 'fab fa-ethereum'
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="{{$sub_menu_icon}}"></i>
+                                <i class="{{ $sub_menu_icon }}"></i>
                                 <p>Orders</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="{{$sub_menu_icon}}"></i>
+                                <i class="{{ $sub_menu_icon }}"></i>
                                 <p>Actions</p>
                             </a>
                         </li>

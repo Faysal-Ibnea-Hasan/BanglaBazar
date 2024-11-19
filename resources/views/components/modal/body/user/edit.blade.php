@@ -1,4 +1,4 @@
-<form id="userCreateForm" action="{{ route('users.update') }}" method="POST" class="row g-3" autocomplete="off">
+<form action="{{ route('users.update') }}" method="POST" class="row g-3" autocomplete="off">
     @csrf
     <input type="hidden" name="id" value="{{$user_details->id}}">
     <div class="col-md-6">
@@ -101,6 +101,6 @@
     </div>
     <div class="col-12 d-flex justify-content-between">
         <button type="submit" class="btn btn-primary">Update</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     </div>
 </form>

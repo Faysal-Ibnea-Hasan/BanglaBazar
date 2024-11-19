@@ -63,8 +63,8 @@
                         </td>
                         <td>
                             <div class="row-span-2">
-                                <button data-url="{{ route('users.edit') }}" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#userUpdate" data-id="{{ $user->id }}"
+                                <button data-url="{{ route('users.edit') }}" type="button" data-toggle="modal"
+                                    data-target="#userUpdate" data-id="{{ $user->id }}"
                                     class="btn btn-primary"><i class="fas fa-edit"></i></button>
                                 <button type="button" data-id="{{ $user->id }}"
                                     data-url="{{ route('users.destroy') }}" class="delete btn btn-danger"><i

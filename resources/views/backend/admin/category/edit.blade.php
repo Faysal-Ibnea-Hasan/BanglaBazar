@@ -3,10 +3,11 @@
 
 </x-modal>
 
-<script>
-    @if ($errors->any() && session('formType') ==='create')
-        // Open the modal if there are validation errors
-        var exampleModal = new bootstrap.Modal(document.getElementById('userCreate'));
-        exampleModal.show();
+{{-- <script>
+    @if ($errors->any() && Route::currentRouteName() === 'categories.edit')
+        // Show the modal
+        $(function() {
+            $('#editCategory').modal('show');
+        });
     @endif
-</script>
+</script> --}}

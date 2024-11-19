@@ -24,7 +24,7 @@ class CategoryController extends Controller
         if ($request->ajax()) {
             // Return a partial view that contains only the posts list
             return response()->json([
-                'html' => view('components.table.category_table',compact('all_data'))->render(),
+                'html' => view('components.table.category_table', compact('all_data'))->render(),
             ]);
         }
         return view('backend.admin.category.index', compact('all_data', 'status'));
@@ -41,23 +41,22 @@ class CategoryController extends Controller
                 break;
         }
         $this->categoryRepo->store_category($request);
-        Session::flash('toast-success', [
-            'title' => 'Success',
-            'body' => 'Category created successfully!'
-        ]);
-        return redirect()->back()->with('formType', 'create');
+        Session::flash('success', 'Category created successfully!');
+        return redirect()->back();
     }
-    public function edit(Request $request){
+    public function edit(Request $request)
+    {
         $category_details = $this->categoryRepo->category_details($request);
         if ($request->ajax()) {
             // Return a partial view that contains only the posts list
             return response()->json([
                 'status' => true,
                 'html' => view('components.modal.body.category.edit', compact('category_details'))->render(),
-            ],200);
+            ], 200);
         }
     }
-    public function update(CategoryRequest $request){
+    public function update(CategoryRequest $request)
+    {
         switch ($request->is_active) {
             case 'on':
                 $request['is_active'] = 1;
@@ -68,32 +67,24 @@ class CategoryController extends Controller
                 break;
         }
         $this->categoryRepo->update_category($request);
-        Session::flash('toast-success', [
-            'title' => 'Success',
-            'body' => 'Category updated successfully!'
-        ]);
-        return redirect()->back()->with('formType', 'update');
+        Session::flash('success', 'Category updated successfully!');
+        return redirect()->back();
     }
     public function status_toogle(Request $request)
     {
         // dd($request->all());
         $this->categoryRepo->status_toogle($request);
-        Session::flash('toast-success', [
-            'title' => 'Success',
-            'body' => 'Status was changed successfully!'
-        ]);
+        Session::flash('success', 'Status was changed successfully!');
         return response()->json([
             'status' => true,
         ], 200);
     }
-    public function destroy(Request $request){
+    public function destroy(Request $request)
+    {
         $this->categoryRepo->delete_category($request);
-        Session::flash('toast-success',[
-            'title' => 'Success',
-            'body' => 'Category deleted successfully!'
-        ]);
+        Session::flash('success', 'Category deleted successfully!');
         return response()->json([
             'status' => true
-        ],200);
+        ], 200);
     }
 }

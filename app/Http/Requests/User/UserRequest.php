@@ -35,7 +35,7 @@ class UserRequest extends FormRequest
                 'division' => 'string',
                 'postal_code' => 'string',
             ];
-        } else{
+        } else {
             return [
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email',
